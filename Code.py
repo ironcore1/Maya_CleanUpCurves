@@ -29,7 +29,9 @@ for eachAttribute in currentSelectKeyable:
 
     print 'NOK', numberOfKeys, eachAttribute, 'value', eachGraphKeyedValues
 
+    #place all the graph values in the public variable listOfValues
     listOfValues.append(eachGraphKeyedValues)
+    #place all the graph times in the public variable listOfValuesTimes
     listOfValuesTimes.append(eachGraphKeyedTimes)
 
 
