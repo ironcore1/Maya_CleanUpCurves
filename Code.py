@@ -11,8 +11,10 @@ frameRangeMax = pm.playbackOptions(query=True,maxTime=True)
 currentSelectKeyable = pm.listAttr(currentSelectionNames, keyable=1)
 
 eachGraphKeyedValues = None
-previous_Value = None
-graphValues = []
+
+listOfValues = []
+listOfValuesTimes = []
+
 
 #Go through the selected controllers graph values visible within in the channel box
 for eachAttribute in currentSelectKeyable:
@@ -22,14 +24,23 @@ for eachAttribute in currentSelectKeyable:
 
     #EachAttributes graphs keyframe values
     eachGraphKeyedValues = pm.keyframe(currentSelectionNames+'.'+eachAttribute, time=(frameRangeMin,frameRangeMax), query=True, valueChange=True)
+    #EachAttributes graphs keyframe times
+    eachGraphKeyedTimes = pm.keyframe(currentSelectionNames+'.'+eachAttribute, query=True,time=(frameRangeMin,frameRangeMax))
+
     print 'NOK', numberOfKeys, eachAttribute, 'value', eachGraphKeyedValues
-    
-    
-    
+
+    listOfValues.append(eachGraphKeyedValues)
+    listOfValuesTimes.append(eachGraphKeyedTimes)
+
+
+zippedTimeValues = zip(listOfValuesTimes,listOfValues)
+
     #create an enum to go through each list of the individual values
-    for eNum, eachAttribute in enumerate(eachGraphKeyedValues):
-        
-        if eNum == 0:
-            continue
-        if 
-        
+
+
+
+#remove keys which are not needed
+'''
+pm.cutKey( currentSelectionNames, time=(56), attribute='translateX', option="keys" )
+'''
+
