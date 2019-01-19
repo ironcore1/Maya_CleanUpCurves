@@ -16,7 +16,7 @@ listOfValues = []
 listOfValuesTimes = []
 
 
-#Go through the selected controllers graph values visible within in the channel box
+#Go through the selected controllers graph values and times visible within in the channel box and place these in variables which are manageable
 for eachAttribute in currentSelectKeyable:
 
     #Check number of keys on each frame
@@ -27,7 +27,7 @@ for eachAttribute in currentSelectKeyable:
     #EachAttributes graphs keyframe times
     eachGraphKeyedTimes = pm.keyframe(currentSelectionNames+'.'+eachAttribute, query=True,time=(frameRangeMin,frameRangeMax))
 
-    print 'NOK', numberOfKeys, eachAttribute, 'value', eachGraphKeyedValues
+    #print 'NOK', numberOfKeys, eachAttribute, 'value', eachGraphKeyedValues
 
     #place all the graph values in the public variable listOfValues
     listOfValues.append(eachGraphKeyedValues)
@@ -35,7 +35,44 @@ for eachAttribute in currentSelectKeyable:
     listOfValuesTimes.append(eachGraphKeyedTimes)
 
 
-zippedTimeValues = zip(listOfValuesTimes,listOfValues)
+
+'''
+Zip both the time and values together so they are more manageable to read
+'''
+
+# place both the time of each keyframes and values in the same list side by side
+groupChannelTimeAndValues = []
+increment = 0
+
+# check how many channels which are aviable to the animator
+channelSize = len(currentSelectKeyable)
+
+# place both the time and values with the groupChannelTimeAndValues variable
+while increment != channelSize:
+
+    timeNValues = zip(listOfValuesTimes[increment], listOfValues[increment])
+    groupChannelTimeAndValues.append(timeNValues)
+    increment = increment + 1
+
+
+'''
+same_Values = []
+previous_Value = None
+
+for i, eachValue in enumerate(listOfValues[0]):
+
+    current_Value = eachValue
+
+    if i == 0:
+        previous_Value = current_Value
+        continue
+    elif current_Value == previous_Value:
+        same_Values.append(current_Value)
+
+
+    previous_Value = current_Value
+'''
+
 
     #create an enum to go through each list of the individual values
 
