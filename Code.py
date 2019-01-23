@@ -61,42 +61,29 @@ lengthOfgroupChannelTimeAndValues = len(groupChannelTimeAndValues)
 
 while increment != lengthOfgroupChannelTimeAndValues:
 
-    for eachGroupTimeAndValue in groupChannelTimeAndValues[increment]:
+    for idNum , eachGroupTimeAndValue in enumerate(groupChannelTimeAndValues[increment]):
 
-        for idNum, individualTimesAndValues in enumerate(eachGroupTimeAndValue):
+        frameNum, value =  eachGroupTimeAndValue
 
-            current_Value = individualTimesAndValues
-            print current_Value
-            if idNum == 0:
-                previous_Value = current_Value
-                continue
+        currentValue = value
 
-            elif current_Value == previous_Value:
-                same_Values.append(current_Value)
+        if idNum == 0:
+
+            previous_Value = currentValue
+            continue
+
+        elif previous_Value == currentValue:
+
+            same_Values.append(currentValue)
+
+        previous_Value = currentValue
+
+
 
     # move onto the next group of values in the list
     increment = increment + 1
 
-'''
-same_Values = []
-previous_Value = None
 
-for i, eachValue in enumerate(listOfValues[0]):
-
-    current_Value = eachValue
-
-    if i == 0:
-        previous_Value = current_Value
-        continue
-    elif current_Value == previous_Value:
-        same_Values.append(current_Value)
-
-
-    previous_Value = current_Value
-'''
-
-
-    #create an enum to go through each list of the individual values
 
 
 
