@@ -54,7 +54,12 @@ while increment != channelSize:
     groupChannelTimeAndValues.append(timeNValues)
     increment = increment + 1
 
+
+attribute_Num = []
+frame_Number_Of_Same_Value = []
 same_Values = []
+
+
 previous_Value = None
 increment = 0
 lengthOfgroupChannelTimeAndValues = len(groupChannelTimeAndValues)
@@ -73,15 +78,19 @@ while increment != lengthOfgroupChannelTimeAndValues:
             continue
 
         elif previous_Value == currentValue:
-
+            
+            attribute_Num.append(increment)
+            frame_Number_Of_Same_Value.append(frameNum)
             same_Values.append(currentValue)
-
+            
         previous_Value = currentValue
 
 
 
     # move onto the next group of values in the list
     increment = increment + 1
+    #store all values in one mega list such as the Attribute number, Frame Number and Values
+    allStats = zip(attribute_Num, frame_Number_Of_Same_Value,same_Values)
 
 
 
