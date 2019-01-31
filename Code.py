@@ -59,6 +59,9 @@ attribute_Num = []
 frame_Number_Of_Same_Value = []
 same_Values = []
 
+#this has all the values and times I will need in order to remove the useless values
+allValues_Times = None
+
 
 previous_Value = None
 increment = 0
@@ -90,10 +93,16 @@ while increment != lengthOfgroupChannelTimeAndValues:
     # move onto the next group of values in the list
     increment = increment + 1
     #store all values in one mega list such as the Attribute number, Frame Number and Values
-    allStats = zip(attribute_Num, frame_Number_Of_Same_Value,same_Values)
+    allValues_Times = zip(attribute_Num, frame_Number_Of_Same_Value,same_Values)
 
 
+'''
+I am currently at this place
+'''
 
+
+for index, frameNumber, frameValue in allValues_Times:
+    print frameValue
 
 
 #remove keys which are not needed
