@@ -95,15 +95,18 @@ while increment != lengthOfgroupChannelTimeAndValues:
     #store all values in one mega list such as the Attribute number, Frame Number and Values
     allValues_Times = zip(attribute_Num, frame_Number_Of_Same_Value,same_Values)
 
+animDict = {} 
+
+for takeAttrValues in allValues_Times:
+    
+    key, index1, index2 = takeAttrValues
+    
+    animDict[key] = index1, index2
+
 
 '''
 I am currently at this place
 '''
-
-
-for index, frameNumber, frameValue in allValues_Times:
-    print frameValue
-
 
 #remove keys which are not needed
 '''
