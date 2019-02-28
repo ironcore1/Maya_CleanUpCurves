@@ -12,6 +12,8 @@ currentSelectKeyable = pm.listAttr(currentSelectionNames, keyable=1)
 
 eachGraphKeyedValues = None
 
+
+listOfAttributes = []
 listOfValues = []
 listOfValuesTimes = []
 
@@ -33,6 +35,8 @@ for eachAttribute in currentSelectKeyable:
     listOfValues.append(eachGraphKeyedValues)
     #place all the graph times in the public variable listOfValuesTimes
     listOfValuesTimes.append(eachGraphKeyedTimes)
+    
+    listOfAttributes.append(eachAttribute)
 
 
 
@@ -99,17 +103,35 @@ animDict = {}
 
 for takeAttrValues in allValues_Times:
     
-    key, index1, index2 = takeAttrValues
+    #convert from tuple to list so it can be appeneded with new values
+    listedTakeAttri = list(takeAttrValues)
     
-    animDict[key] = index1, index2
+    key = listedTakeAttri[0]
+    
+    if key not in animDict:
+        
+        animDict[key]  = []
+        animDict[key].append(listedTakeAttri[1:3])
+        
+    else:
+        
+        animDict[key].append(listedTakeAttri[1:3])
+        
+
+numberWithAttributeName = {}
+for namNum, namesOfAttr in enumerate(listOfAttributes):  
+    numberWithAttributeName[namNum] = namesOfAttr
 
 
-'''
-I am currently at this place
-'''
+for keysl in animDict.keys():
+    #print 'the key' ,keys,'time and values', animDict[keys][1:-1]
+    listToDel = animDict[keysl][1:-1]
+    
+    for times in listToDel:
+        name = numberWithAttributeName[keysl]
+        print currentSelectionNames, times[0], name
 
-#remove keys which are not needed
-'''
-pm.cutKey( currentSelectionNames, time=(56), attribute='translateX', option="keys" )
-'''
+        
+        #this deletes
+        pm.cutKey( currentSelectionNames, time=(times[0]), attribute=name, option="keys" )
 
